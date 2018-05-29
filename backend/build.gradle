@@ -35,3 +35,9 @@ dependencies {
 
     implementation project(":JokeSmithy")
 }
+
+/*appengine{
+    run {
+        host = '0.0.0.0'
+    }
+}*/

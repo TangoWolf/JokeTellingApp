@@ -1,10 +1,16 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jokelibrary.JokeActivity;
+import com.google.android.gms.ads.AdView;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -43,7 +49,6 @@ public class MyAsyncTask extends AsyncTask<Void, Void, String> {
         }
 
         try {
-            //return myApiService.sayHi(name).execute().getData();
             return myApiService.getAJoke().execute().getData();
         } catch(IOException e) {
             return e.getMessage();
@@ -52,6 +57,8 @@ public class MyAsyncTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(mContext, JokeActivity.class);
+        intent.putExtra("joke", result);
+        mContext.startActivity(intent);
     }
 }
